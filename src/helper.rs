@@ -7,15 +7,27 @@ pub mod Helper{
     const OK:i32 = 0;
     const ERR:i32 = -1;
 
+    #[derive(Debug,Clone)]
+    pub enum Cmnd{
+        Init,
+        Add,
+        Commit,
+        Diff,
+        Push,
+        Pull,
+        Checkout,
+        Branch,
+        Status
+    }
+
 
     #[derive(Debug,Clone)]
     pub struct CLI{
         pub dbg: bool,
-        pub cmnd: SubCommand,
+        pub cmnd: Cmnd,
         pub args: Vec<String>,
         
     }
-
 
     pub fn Help(){
         println!("{DBG_STR}");
@@ -25,21 +37,36 @@ pub mod Helper{
 
     impl CLI{
         pub fn new() -> Self{
-            Self {dbg: false  }
+            Self {dbg: false,cmnd:Cmnd::Init,args:vec![]}
         }
 
         pub fn Parse_Args(&mut self){
             let args: Vec<String> = std::env::args().skip(1).collect();
-           for i in &args{
+            if args.len() >= 1{
+                self.cmnd = match &args[0][..]{
+                    "init" => Cmnd::Init,
+                    "add" => Cmnd::Add,
+                    "commit" => Cmnd::Commit,
+                    "diff" => Cmnd::Diff,
+                    "push" => Cmnd::Push,
+                    "pull" => Cmnd::Pull,
+                    "checkout" => Cmnd::Checkout,
+                    "branch" => Cmnd::Branch,
+                    "status" => Cmnd::Status,
+                    _ => {panic!("Invalid Command");}
+                }
+            }
+        
+
+           for i in args.iter().skip(1){
                 if i == "-d" || i == "--debug" || i == " --DEBUG" || i == "-D"{
                     self.dbg = true;
                 } else if i == "-h" || i == "--help" || i == " --HELP" || i == "-H"{
                     Help();
                 } else{
-                    Help();
+                    self.args.push(i.to_string());
                 }
            } 
-
 
         }
 

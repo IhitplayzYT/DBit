@@ -43,6 +43,9 @@ pub mod add{
                 recurse_paths(&i,&mut files);
             }
         }
+        // We use the same algo git uses but store in .DBit/objects
+        
+
 
         // TODO: Further Processing here
 

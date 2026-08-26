@@ -4,6 +4,7 @@ use crate::{cmnds::{Add::add::add_cmnd, Branch::branch::branch_cmnd, Checkout::c
 
 mod helper;
 mod cmnds;
+mod fs_abs;
 fn main() {
     let mut clargs = CLI::new();
     clargs.Parse_Args();

@@ -1,0 +1,17 @@
+Sqlite(path="./data/local.db",name="local_cache")
+@Init
+    init: [users(profiles,sessions), logs(events,errors), config]
+@Monitor
+    database: [users, logs]
+
+PostgreSQL(host="10.0.0.5:5432",user="admin",pass="s3cr3t",database="main",name="primary_pg")
+@Init
+    init: [orders(line_items), customers]
+@Monitor
+    database: [orders, customers]
+
+Mysql(host="db.internal:3306",user="root",pass="rootpass",database="analytics",name="analytics_db")
+@Observe
+    database: [events, aggregates, reports]
+
+Sqlite(path="./tmp/scratch.db",name="scratch")

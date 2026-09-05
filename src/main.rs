@@ -22,7 +22,7 @@ fn main() {
     match clargs.cmnd{
         Cmnd::Init => {init_cmnd(clargs.args)},
         Cmnd::Add => {add_cmnd(clargs.args,db_ignore)},
-        Cmnd::Commit => {commit_cmnd(clargs.args,db_ignore)},
+        Cmnd::Commit => {commit_cmnd(clargs.args)},
         Cmnd::Diff => {diff_cmnd(clargs.args)},
         Cmnd::Push => {push_cmnd(clargs.args)},
         Cmnd::Pull => {pull_cmnd(clargs.args)},

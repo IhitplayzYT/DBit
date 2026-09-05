@@ -27,8 +27,6 @@ use crate::obj::ref_storage::ref_storage;
         }
 
         let src_hash = ref_storage::get_branch_hash(src);
-        // FIXME:
-        let _trgt_hash = ref_storage::get_branch_hash(trgt);
         
         if let Some(hash) = src_hash {
             if !hash.is_empty() {

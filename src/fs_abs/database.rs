@@ -1,7 +1,9 @@
 pub mod database {
     use std::collections::HashMap;
     use mysql::prelude::Queryable;
+    use serde::{Serialize, Deserialize};
 
+    #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash)]
     pub enum DatabaseType {
         SQLite,
         MySQL,
@@ -9,7 +11,7 @@ pub mod database {
     }
 
     pub trait Database {
-        fn connect(&mut self,username: &str,pass: &str,ip_str: &str,db: &str) -> Result<(), String>;
+        fn connect(&mut self, username: &str, pass: &str, ip_str: &str, db: &str) -> Result<(), String>;
         fn disconnect(&mut self) -> Result<(), String>;
         fn execute(&mut self, query: &str) -> Result<(), String>;
         fn query(&mut self, query: &str) -> Result<Vec<HashMap<String, String>>, String>;

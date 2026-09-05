@@ -5,6 +5,7 @@ use crate::{cmnds::{Add::add::add_cmnd, Branch::branch::branch_cmnd, Checkout::c
 mod helper;
 mod cmnds;
 mod fs_abs;
+mod obj;
 fn main() {
     let mut clargs = CLI::new();
     clargs.Parse_Args();
@@ -18,11 +19,10 @@ fn main() {
         Err(_) => {None}
     };
 
-
     match clargs.cmnd{
         Cmnd::Init => {init_cmnd(clargs.args)},
         Cmnd::Add => {add_cmnd(clargs.args,db_ignore)},
-        Cmnd::Commit => {commit_cmnd(clargs.args)},
+        Cmnd::Commit => {commit_cmnd(clargs.args,db_ignore)},
         Cmnd::Diff => {diff_cmnd(clargs.args)},
         Cmnd::Push => {push_cmnd(clargs.args)},
         Cmnd::Pull => {pull_cmnd(clargs.args)},

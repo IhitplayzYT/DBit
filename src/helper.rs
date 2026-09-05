@@ -42,8 +42,8 @@ pub mod Helper{
 
         pub fn Parse_Args(&mut self){
             let args: Vec<String> = std::env::args().collect();
-            if args.len() >= 1{
-                self.cmnd = match &args[0][..]{
+            if args.len() >= 2{
+                self.cmnd = match &args[1][..]{
                     "init" => Cmnd::Init,
                     "add" => Cmnd::Add,
                     "commit" => Cmnd::Commit,
@@ -59,7 +59,7 @@ pub mod Helper{
                 panic!("Need atleast one CLI arg");
             }
 
-           for i in args.iter().skip(1){
+           for i in args.iter().skip(2){
                 if i == "-d" || i == "--debug" || i == " --DEBUG" || i == "-D"{
                     self.dbg = true;
                 } else if i == "-h" || i == "--help" || i == " --HELP" || i == "-H"{
